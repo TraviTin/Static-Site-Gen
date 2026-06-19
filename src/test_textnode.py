@@ -2,6 +2,7 @@ import unittest
 
 from htmlnode import HtmlNode
 from textnode import TextNode, TextType, text_node_to_html_node
+from split_text import split_nodes_delimiter
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
@@ -69,6 +70,30 @@ class TestTextNode(unittest.TestCase):
         )
 
 
+    def test_split_bold(self):
+        node = [TextNode("This is **an** image", TextType.TEXT,)]
+        split_node = split_nodes_delimiter(old_nodes=node, delimiter="**", text_type=TextType.BOLD)
+        self.assertEqual(split_node,[
+    TextNode("This is ", TextType.TEXT),
+    TextNode("an", TextType.BOLD),
+    TextNode(" image", TextType.TEXT),
+])
+
+    def test_split_italice(self):
+        node = [TextNode("This is *an* image", TextType.TEXT,)]
+        split_node = split_nodes_delimiter(old_nodes=node, delimiter="*", text_type=TextType.ITALIC)
+        self.assertEqual(split_node,[
+    TextNode("This is ", TextType.TEXT),
+    TextNode("an", TextType.ITALIC),
+    TextNode(" image", TextType.TEXT),
+])
+
+    def test_split_plain_text(self):
+        node = [TextNode("This is an image", TextType.TEXT,)]
+        split_node = split_nodes_delimiter(old_nodes=node, delimiter="**", text_type=TextType.BOLD)
+        self.assertEqual(split_node,[
+    TextNode("This is an image", TextType.TEXT),
+])
 
 if __name__ == "__main__":
     unittest.main()
