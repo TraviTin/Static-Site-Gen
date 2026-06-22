@@ -1,3 +1,5 @@
+from cgitb import text
+
 from textnode import TextNode, TextType
 import re
 
@@ -93,8 +95,14 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
     return new_nodes
 
 
-
-
+def text_to_textnodes(raw_text: str)-> list[TextNode]:
+    raw_text_node = [(TextNode(raw_text, TextType.TEXT))]
+    raw_text_node_bold = split_nodes_delimiter(old_nodes=raw_text_node,delimiter="**", text_type=TextType.BOLD)
+    raw_text_node_italic = split_nodes_delimiter(old_nodes=raw_text_node_bold,delimiter="_", text_type=TextType.ITALIC)
+    raw_text_node_code = split_nodes_delimiter(old_nodes=raw_text_node_italic,delimiter="`", text_type=TextType.CODE)
+    text_node_images = split_nodes_image(old_nodes=raw_text_node_code)
+    text_node_images_and_links = split_nodes_link(old_nodes=text_node_images)
+    return text_node_images_and_links
 
 
 
