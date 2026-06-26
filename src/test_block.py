@@ -1,5 +1,4 @@
 import unittest
-from block_markdown import *
 from markdown_to_html import *
 
 class TestTextNode(unittest.TestCase):

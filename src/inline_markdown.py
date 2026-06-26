@@ -1,5 +1,3 @@
-from cgitb import text
-
 from textnode import TextNode, TextType
 import re
 
