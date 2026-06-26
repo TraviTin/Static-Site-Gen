@@ -8,7 +8,7 @@ def main() -> None:
     else:
         basepath = sys.argv[1]
     copy_files_from_folder("static", "docs")
-    generate_pages_recursive("content", "template.html", "public", basepath)
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 
 main()
