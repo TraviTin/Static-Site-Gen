@@ -1,2 +1,3 @@
 # Static-Site-Gen
-https://github.com/TraviTin/Static-Site-Gen
+
+https://TraviTin.github.io/Static-site-Gen/)
