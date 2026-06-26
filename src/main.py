@@ -1,11 +1,14 @@
 from os_work import *
-from textnode import TextNode, TextType
 from getcontent import *
-
-
+import sys
 
 def main() -> None:
-    copy_files_from_folder("static", "public")
-    generate_pages_recursive("content", "template.html", "public")
+    if len(sys.argv) != 2:
+        basepath = "/"
+    else:
+        basepath = sys.argv[1]
+    copy_files_from_folder("static", "docs")
+    generate_pages_recursive("content", "template.html", "public", basepath)
+
 
 main()
