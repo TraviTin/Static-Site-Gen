@@ -22,7 +22,7 @@ def generate_page(from_path, template_path, dest_path, basepath):
     content_template_src = content_template_href.replace('src="/', f'src="{basepath}')
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     f = open(dest_path, "w")
-    f.write(content_template)
+    f.write(content_template_src)
     f.close()
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
