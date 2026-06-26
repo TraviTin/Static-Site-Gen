@@ -79,8 +79,8 @@ def unordered_list_node(block: str) -> HtmlNode:
     split_by_lines = block.split("\n")
     list_of_all_nodes = []
     for lines in split_by_lines:
-        if not lines.startswith(">"):
-            raise ValueError("invalid quote block")
+        if not lines.startswith("- ") and not lines.startswith("* "):
+            raise ValueError("invalid ul block")
         stripped = lines[2:]
         list_nodes = text_to_children(stripped)
         node = ParentNode(tag="li", children=list_nodes)
@@ -108,3 +108,14 @@ def text_to_children(block: str) -> list[HtmlNode]:
         nodes = text_node_to_html_node(node)
         html_children.append(nodes)
     return html_children
+
+
+
+def extract_title(markdown) -> str:
+    split_by_lines = markdown.split("\n")
+    for line in split_by_lines:
+        if line.startswith("# "):
+            title = line[2:].strip()
+            return title
+    raise Exception("no title?")
+
